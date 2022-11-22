@@ -1,0 +1,86 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+}
+
+
+[class^="btn"]{
+    position: absolute;
+    top: 45%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 4rem;
+    height: 4rem;
+
+    font-size: 25px;
+    background: #ddd;
+    opacity: 90%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.btn-right{
+    right: 0;
+}
+
+
+[class*="plane"]{
+    position: absolute;
+
+    width: 10%;
+    height: 5%;
+    transition: 50ms;
+}
+
+[class*="bullet"]{
+    position: absolute;
+
+    width: 1.9rem;
+    height: 1.9rem;
+}
+
+
+.jet-plane{
+    bottom: 0;
+    left: calc(var(--x) * 5%);
+
+    background: pink;
+}
+
+.jet-plane-bullet{
+    left: calc((var(--x) + 0.75) * 5%);
+    bottom: 0;
+    z-index: -1;
+    
+    background: orange;
+    animation: 8s shootEnemy linear;    
+}
+
+@keyframes shootEnemy {
+    from { bottom: 0; }
+    to{ bottom: 120%; }
+}
+
+
+.enemy-plane{
+    top: 0;
+    left: calc(var(--x) * 5%);
+
+    background: orange;
+}
+
+.enemy-plane-bullet{
+    left: calc((var(--x) + 0.75) * 5%);
+
+    background: red;
+    animation: 10s shootPlayer linear;
+}
+
+@keyframes shootPlayer {
+    from { top: 1.9rem; }
+    to{ top: 120%; }
+}

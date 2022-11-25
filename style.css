@@ -28,6 +28,7 @@ body{
 }
 
 
+
 [class*="plane"]{
     position: absolute;
 
@@ -44,11 +45,13 @@ body{
 }
 
 
+
 .jet-plane{
     bottom: 0;
     left: calc(var(--x) * 5%);
 
     background: pink;
+    border-radius: 100% 100% 0 0;
 }
 
 .jet-plane-bullet{
@@ -56,8 +59,9 @@ body{
     bottom: 0;
     z-index: -1;
     
-    background: orange;
-    animation: 8s shootEnemy linear;    
+    animation: 8s shootEnemy linear;
+    border-radius: 60% 60% 0 0;
+    background: #ff0000;
 }
 
 @keyframes shootEnemy {
@@ -66,21 +70,26 @@ body{
 }
 
 
+
 .enemy-plane{
     top: 0;
     left: calc(var(--x) * 5%);
 
     background: orange;
+    border-radius: 0 0 100% 100%;
 }
 
 .enemy-plane-bullet{
     left: calc((var(--x) + 0.75) * 5%);
 
-    background: red;
+    background: #db0000;
+    border-radius: 0 0 60% 60%;
+
     animation: 10s shootPlayer linear;
+    z-index: -1;
 }
 
 @keyframes shootPlayer {
     from { top: 1.9rem; }
-    to{ top: 120%; }
+    to { top: 120%; }
 }

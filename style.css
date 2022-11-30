@@ -1,8 +1,31 @@
 body{
     margin: 0;
     padding: 0;
-    overflow-y: hidden;
+    overflow: hidden;
+
+    background: #343434;
 }
+
+.life{
+    position: absolute;
+    bottom: 0;
+
+    display: flex;
+    align-items: center;
+
+    width: 10rem;
+    height: 1.6rem;
+    background: #ddd;
+
+    z-index: 10;
+}
+
+.life-left{
+    width: calc(var(--life) * 1%);
+    height: 1.2rem;
+    background: #ff0000;
+}
+
 
 
 [class^="btn"]{
@@ -32,8 +55,8 @@ body{
 [class*="plane"]{
     position: absolute;
 
-    width: 10%;
-    height: 5%;
+    width: 5rem;
+    height: 3rem;
     transition: 50ms;
 }
 
@@ -47,16 +70,15 @@ body{
 
 
 .jet-plane{
+    left: calc(var(--x) * 3.5rem);
     bottom: 0;
-    left: calc(var(--x) * 5%);
 
     background: pink;
     border-radius: 100% 100% 0 0;
 }
 
 .jet-plane-bullet{
-    left: calc((var(--x) + 0.75) * 5%);
-    bottom: 0;
+    left: calc((var(--x) + 0.45) * 3.5rem);
     z-index: -1;
     
     animation: 8s shootEnemy linear;
@@ -65,22 +87,28 @@ body{
 }
 
 @keyframes shootEnemy {
-    from { bottom: 0; }
+    from { bottom: 2.5rem; }
     to{ bottom: 120%; }
 }
 
 
 
 .enemy-plane{
-    top: 0;
-    left: calc(var(--x) * 5%);
+    left: calc(var(--x) * 3.5rem);
 
     background: orange;
     border-radius: 0 0 100% 100%;
+
+    animation: 500ms flyToYou ease;
+}
+
+@keyframes flyToYou{
+    0%{ top: -10rem; }
+    100%{ top: 0rem; }
 }
 
 .enemy-plane-bullet{
-    left: calc((var(--x) + 0.75) * 5%);
+    left: calc((var(--x) + 0.45) * 3.5rem);
 
     background: #db0000;
     border-radius: 0 0 60% 60%;
@@ -90,6 +118,6 @@ body{
 }
 
 @keyframes shootPlayer {
-    from { top: 1.9rem; }
+    from { top: 2.5rem; }
     to { top: 120%; }
 }

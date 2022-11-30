@@ -1,12 +1,17 @@
 export default class PlaneGame{
-    constructor(body, plane){
+    constructor(body, plane, life_left){
         this._body = body;
         this._jetPlane = plane;
+        this._lifeLeft = life_left;
 
-        this._enemyPlaneBulletX = [];
-        this._enemyPlaneBullet = [];
+        this._planeLife = 98;
+        this._win = 0;
         this._jetPlaneBullet = [];
         this._jetPlaneX = 0;
+
+        this._enemyPlaneNumber = 1;
+        this._enemyPlaneBulletX = [];
+        this._enemyPlaneBullet = [];
     }
 
     move(keyCode){
@@ -16,32 +21,12 @@ export default class PlaneGame{
         }
 
         else if (keyCode == 68){
-            this._jetPlaneX < 18 ? this._jetPlaneX += 1 : this._jetPlaneX;
+            this._jetPlaneX < 23 ? this._jetPlaneX += 1 : this._jetPlaneX;
             this._jetPlane.style.setProperty('--x', this._jetPlaneX);
         }
 
         else if (keyCode == 32){
             this.summonBullets();
-        }
-    }
-
-
-    
-    randomLeft(left){
-        return Math.floor(Math.random() * 18);
-    }
-
-    summonEnemyPlane(){
-        for (let i = 0; i < 3; i++){
-            let left = this.randomLeft();
-            let enemyPlane = document.createElement('div');
-
-            enemyPlane.setAttribute('class', 'enemy-plane');
-            enemyPlane.style.setProperty('--x', left);
-
-            this._enemyPlaneBulletX.push(left);
-            this.summonEnemyBullets(left);
-            this._body.appendChild(enemyPlane);
         }
     }
 
@@ -52,6 +37,27 @@ export default class PlaneGame{
 
         this._jetPlaneBullet.push(bullet);
         this._body.appendChild(bullet);
+    }
+    
+
+
+    randomLeft(left){
+        return Math.floor(Math.random() * 23);
+    }
+
+    summonEnemyPlane(){
+        for (let i = 0; i < this._enemyPlaneNumber; i++){
+            let left = this.randomLeft();
+            let enemyPlane = document.createElement('div');
+
+            enemyPlane.setAttribute('class', 'enemy-plane');
+            enemyPlane.style.setProperty('--x', left);
+
+            this._enemyPlaneBulletX.push(left);
+
+            this.summonEnemyBullets(left);
+            this._body.appendChild(enemyPlane);
+        }
     }
 
     summonEnemyBullets(left){
@@ -78,12 +84,27 @@ export default class PlaneGame{
         let enemyPlane = document.getElementsByClassName('enemy-plane');
         let enemyBullet = document.getElementsByClassName('enemy-plane-bullet');
 
+        if (enemyPlane.length === 0){
+            this.summonEnemyPlane();
+            this._win++;
+
+            if (this._win < 9){
+                if (this._win % 3 === 0){
+                    this._enemyPlaneNumber++;
+                }
+            }
+
+            else{
+                alert('you win !');
+            }
+        }
+
         this.checkBullet(enemyBullet);
 
         for (let a of this._jetPlaneBullet){
             for (let o of enemyBullet){
                 if (this.isObstacle(a, o)){
-                    this.deleteBullet(a);
+                    this.deleteBullet(a);                    
                     this.deleteEnemyBullet(o);
 
                     a.remove();
@@ -114,8 +135,14 @@ export default class PlaneGame{
         for (let i of enemy){
             if (this.isObstacle(i, this._jetPlane)){
                 i.remove();
-                this._jetPlane.remove();
                 this.deleteEnemyBullet(i);
+
+                this._planeLife -= 20;
+                this._lifeLeft.style.setProperty('--life', this._planeLife);
+
+                if (this._planeLife <= 0){
+                    this._jetPlane.remove();
+                }
             }
 
             if (i.offsetTop >= 630){
@@ -125,7 +152,7 @@ export default class PlaneGame{
         }
     }
 
-    
+
     
     isObstacle(a, b){
         let itemA = a.getBoundingClientRect();

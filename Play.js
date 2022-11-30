@@ -4,8 +4,10 @@ let shootTime = 0;
 
 let body = document.body;
 let plane = document.querySelector('.jet-plane');
-let game = new PlaneGame(body, plane);
-game.summonEnemyPlane();
+let life_left = document.querySelector('.life-left');
+
+let game = new PlaneGame(body, plane, life_left);
+game._lifeLeft.style.setProperty('--life', game._planeLife);
 
 document.addEventListener('keyup', (event) => {
     let code = event.keyCode;

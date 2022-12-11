@@ -1,7 +1,8 @@
 # spaceship-wars
 Simple spaceship wars game<br>
 
-Link under construction
+Game Link :<br>
+https://ahu14.github.io/spaceship-wars/
 
 <br><br>
 ## Feature :

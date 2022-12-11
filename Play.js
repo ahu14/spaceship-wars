@@ -1,32 +1,31 @@
-import PlaneGame from "./PlaneGame.js";
-
-let shootTime = 0;
+import Plane from "./PlaneGame.js";
+import EnemyPlane from "./EnemyPlane.js";
 
 let body = document.body;
-let plane = document.querySelector('.jet-plane');
-let life_left = document.querySelector('.life-left');
+let jet_plane = document.querySelector('.jet-plane');
+let score = document.querySelector('#score');
 
-let game = new PlaneGame(body, plane, life_left);
-game._lifeLeft.style.setProperty('--life', game._planeLife);
-
-document.addEventListener('keyup', (event) => {
-    let code = event.keyCode;
-    game.move(code);
-})
+let plane = new Plane(body, jet_plane, score);
+let enemyPlane = new EnemyPlane(body);
 
 
-setInterval(() => {
-    if (shootTime > 20){
-        shootTime = 0;
-        game.bulletPosition(game._enemyPlaneBulletX);
+document.addEventListener('click', (event) => {
+    let clicked = event.target.className;
 
-        for (let i = 0; i < game._enemyPlaneBulletX.length; i++){
-            game.summonEnemyBullets(game._enemyPlaneBulletX[i]);
-        }
+    if (clicked.includes('btn')){
+        clicked.includes('left') ? plane.move(65) : plane.move(68);
     }
 
     else{
-        shootTime++;
-        game.bulletPosition(game._enemyPlaneBulletX);
+        plane.move(32);
     }
-}, 100)
+})
+
+
+document.addEventListener('keyup', (event) => {
+    let code = event.keyCode;
+    plane.move(code);
+})
+
+plane.bulletMove();
+enemyPlane.enemyBulletMove();

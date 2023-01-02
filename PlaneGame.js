@@ -6,8 +6,6 @@ export default class Plane{
         this.plane = plane;
 
         this.planeX = 0;
-        this.bulletX = 0;
-        this.bullet = [];
 
         this.scoreNum = 0;
         this.score = score;
@@ -21,14 +19,11 @@ export default class Plane{
     }
 
     addBullet(){
-        this.bulletX = this.planeX + 0.7;
-
         let bullet = document.createElement('div');
         bullet.className = "jet-plane-bullet";
-        bullet.style.setProperty('--x', this.bulletX);
+        bullet.style.setProperty('--x', this.planeX + 0.7);
         bullet.style.setProperty('--y', 1);
 
-        this.bullet.push(bullet);
         document.body.appendChild(bullet);
     }
 
@@ -60,24 +55,21 @@ export default class Plane{
 
 
     bulletMove(){
-        let bullet = document.getElementsByClassName('jet-plane-bullet');
-        console.log(this.score);
         this.score.innerHTML = this.scoreNum;
         
         let shootBullet = () => {
+            let bullet = document.querySelectorAll('.jet-plane-bullet');
             let enemyPlane = document.querySelectorAll('.enemy-jet');
             let enemyBullet = document.querySelectorAll('.enemy-bullet');
 
             for (let i of bullet){
-                this.alreadyLeftScreen(i);
-
-                for (let a of enemyPlane){                    
+                for (let a of enemyPlane){
                     if (this.crashSomething(i, a)){
-                        this.scoreNum++;
-                        this.score.innerHTML = this.scoreNum;
-
                         i.remove();
                         a.remove();
+
+                        this.scoreNum += 1;
+                        this.score.innerHTML = this.scoreNum;
                     }
                 }
 
@@ -87,6 +79,8 @@ export default class Plane{
                         o.remove();
                     }
                 }
+
+                this.alreadyLeftScreen(i);
             }
         
             requestAnimationFrame(shootBullet);

@@ -8,6 +8,21 @@ body{
 
 
 
+.top{
+    display: flex;
+    flex-direction: row;
+}
+
+#score{
+    margin: 0;
+    color: red;
+    font-size: 50px;
+    font-family: sans-serif;
+    z-index: 100;
+}
+
+
+
 [class^="btn"]{
     position: absolute;
     top: 45%;
@@ -28,15 +43,6 @@ body{
 
 .btn-right{
     right: 0;
-}
-
-
-#score{
-    position: absolute;
-    top: -9vh;
-
-    color: #fff;
-    font-size: 50px;
 }
 
 
@@ -67,7 +73,7 @@ body{
 
 .jet-plane-bullet{
     left: calc(var(--x) * 4vw);
-    bottom: calc(var(--y) * 4vw);
+    bottom: calc(var(--y) * 4vh);
     z-index: -1;
     
     animation: 8s linear;

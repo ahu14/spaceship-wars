@@ -3,12 +3,10 @@ import Plane from "./PlaneGame.js";
 export default class EnemyPlane{
     constructor(body){
         this.body = body;
-        this.randomNum = this.randomNumber();
+        this.speed = 0.7;
 
         this.index = 0;
         this.bulletX = [];
-        this.randomIndex = [];
-        this.bulletPosition = [];
         this.position = this.randomizePosition();
     }
 
@@ -18,30 +16,10 @@ export default class EnemyPlane{
         for (let i = 0; i < 23; i+=3){
             this.position.push(i);
         }
-
-        for (let a = 0; a < this.position.length; a++){
-            this.randomIndex.push(a);
-        }
-    }
-
-    randomizeIndex(){
-        let pos = this.position.length - 1;
-
-        while (pos != 0){
-            let random = Math.floor(Math.random() * pos);
-            pos--;
-
-            [this.randomIndex[pos], this.randomIndex[random]] = [
-                this.randomIndex[random], this.randomIndex[pos]
-            ];
-        }
-
-        return this.randomIndex;
     }
 
     randomizePosition(){
         this.addPosition();
-        this.randomizeIndex();
 
         let length = this.position.length - 1;
         
@@ -58,35 +36,26 @@ export default class EnemyPlane{
     }
 
 
-
-    randomNumber(){
-        let random = Math.floor(Math.random() * 3);
-        return random <= 0 ? random += 1 : random;
-    }
-
     summonEnemyPlane(){
-        for (let i = 0; i < this.randomNumber(); i++){
+        for (let i = 0; i < 2; i++){
             let enemy = document.createElement('div');
             enemy.className = "enemy-jet";
+            enemy.style.setProperty('--x', this.position[this.index]);
 
-            let index = this.randomIndex[this.index];
-            enemy.style.setProperty('--x', this.position[index]);
+            this.bulletX.push(this.position[this.index]);
+            this.index >= this.position.length - 1 ? this.index = 0 : this.index++;
 
-            this.bulletPosition.push(this.position[index]);
-            this.bulletX.push(this.position[index] + 0.7);
-
-            this.index > this.position.length - 1 ? this.index = 0 : this.index++;
             document.body.appendChild(enemy);
         }
     }
 
     addEnemyBullet(){
-        for (let a = 0; a < this.bulletPosition.length; a++){
+        for (let a = 0; a < this.bulletX.length; a++){
             let bullet = document.createElement('div');
             bullet.className = "enemy-bullet";
 
-            bullet.style.setProperty('--x', this.bulletX[a]);
-            bullet.style.setProperty('--y', 0);
+            bullet.style.setProperty('--x', this.bulletX[a] + 0.7);
+            bullet.style.setProperty('--y', this.speed);
 
             document.body.appendChild(bullet);
         }
@@ -95,17 +64,14 @@ export default class EnemyPlane{
 
     checkPlane(){
         let enemyPlane = document.querySelectorAll('.enemy-jet');
-        let array = [];
         let bulletArray = [];
 
-        if (enemyPlane.length != this.bulletPosition.length){
+        if (enemyPlane.length != this.bulletX.length){
             enemyPlane.forEach((element, index) => {
                 let x = parseInt(element.style.getPropertyValue('--x'));
-                array.push(x);
-                bulletArray.push(x + 0.7);
+                bulletArray.push(x);
             })
 
-            this.bulletPosition = array;
             this.bulletX = bulletArray;
         }
     }
@@ -143,18 +109,21 @@ export default class EnemyPlane{
         let plane = document.querySelector('.jet-plane');
 
         let shootEnemyBullet = () => {
+            this.checkPlane();
+
             let enemyPlane = document.querySelectorAll('.enemy-jet');
             let enemyBullet = document.querySelectorAll('.enemy-bullet');
-            this.checkPlane();
 
             if (enemyPlane.length == 0){
                 this.summonEnemyPlane();
+                this.speed += 0.00005;
             }
 
 
-            if (animationId % 140 == 0){
+            if (animationId % 180 == 0){
                 this.addEnemyBullet();
             }
+
 
             enemyBullet.forEach((element, index) => {
                 this.alreadyLeftScreen(element);
@@ -169,6 +138,6 @@ export default class EnemyPlane{
             animationId = requestAnimationFrame(shootEnemyBullet);
         }
 
-        shootEnemyBullet();
+        requestAnimationFrame(shootEnemyBullet);
     }
 }

@@ -4,12 +4,11 @@ Simple spaceship wars game<br>
 Game Link :<br>
 https://ahu14.github.io/spaceship-wars/
 
-<br><br>
+<br>
 ## Feature :
-- You can shoot enemy
-- Enemy can shoot you too
+- Enemy can shoot you
 
-<br><br>
+<br>
 ## Language used : 
 - HTML 
 - CSS 

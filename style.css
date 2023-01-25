@@ -47,58 +47,60 @@ body{
 
 
 
-[class*="jet"]{
+.plane{
     position: absolute;
+    left: calc(var(--x));
+    top: calc(var(--y));
 
-    width: 8vw;
-    height: 4vw;
+    width: calc(var(--width) * 1vh);
+    height: calc(var(--height) * 1vh);
     transition: 50ms;
+
+    background: #ddd;
 }
 
-[class*="bullet"]{
+
+.enemy{
     position: absolute;
+    left: calc(var(--x));
+    top: calc(var(--y));
 
-    width: 2vw;
-    height: 2vw;
+    width: calc(var(--width) * 1vh);
+    height: calc(var(--height) * 1vh);
+    transition: 50ms;
+
+    background: #ccc;
 }
 
-
-
-.jet-plane{
-    left: calc(var(--x) * 4vw);
-    bottom: 0;
-
-    background: #ddd;
-}
-
-.jet-plane-bullet{
-    left: calc(var(--x) * 4vw);
-    bottom: calc(var(--y) * 4vh);
-    z-index: -1;
-    
-    animation: 8s linear;
-    border-radius: 60% 60% 0 0;
-    background: #ff0000;
-}
-
-
-.enemy-jet{
-    left: calc(var(--x) * 4vw);
-    top: 0;
-
-    background: #ddd;
-}
 
 .enemy-bullet{
-    left: calc(var(--x) * 4vw);
-    top: calc(var(--y) * 4vh);
+    position: absolute;
+    left: calc(var(--x));
+    top: calc(var(--y));
     z-index: -1;
+
+    width: calc(var(--width) * 1vh);
+    height: calc(var(--height) * 1vh);
     
     animation: 8s linear;
-    border-radius: 0 0 60% 60%;
     background: #ff0000;
 }
 
+.notif-box{
+    position: absolute;
+    bottom: 5vh;
+
+    width: 100vw;
+    height: 10vh;
+
+    text-align: center;
+}
+
+#notif-message{
+    font-size: 30px;
+    font-family: sans-serif;
+    color: #ff0000;
+}
 
 
 @media screen and (min-width: 768px){

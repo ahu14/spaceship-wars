@@ -32,4 +32,9 @@ export default class GameObject{
 
         this.getBody().append(obj);
     }
+
+    removeObject(type, id){
+        let obj = this.getObject(this.type, this.id);
+        obj.remove();
+    }
 }

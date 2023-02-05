@@ -15,7 +15,7 @@ function isCollision(objA, objB){
 }
 
 function randomPlane(){
-    return Math.floor(Math.random() * 6);
+    return Math.floor(Math.random() * 3);
 }
 
 
@@ -24,6 +24,10 @@ document.addEventListener('click', (event) => {
 
     if (clicked.includes('btn')){
         clicked.includes('left') ? plane.move(65) : plane.move(68);
+    }
+
+    else{
+        plane.move(32, gameObj);
     }
 })
 
@@ -53,20 +57,26 @@ score.innerHTML = scoreNum;
 let notifMsg = document.querySelector('#notif-message');
 
 if (window.innerWidth > 768){
-    notifMsg.innerHTML = 'Click A to move left and D to move right';
+    notifMsg.innerHTML = 'Click A to move left, D to move right and space for shoot';
+}
+
+else{
+    notifMsg.innerHTML = 'Click < to move left, > to move right and tap the screen to shoot';
 }
 
 
 function play(time){
+    let allEnemy = gameObj.filter(data => data.type.includes('enemy') && data.dead == false);
     let enemyData = gameObj.filter(data => data.type == 'enemy' && data.dead == false);
     let enemyBullet = gameObj.filter(data => data.type == 'enemy-bullet' && data.dead == false);
     let plane = gameObj.filter(data => data.type == 'plane');
+    let bullet = gameObj.filter(data => data.type == 'bullet' && data.dead == false);
 
     if (startTime == undefined){
         startTime = time;
         times += 1;
         
-        if (times % 2 == 0){            
+        if (times % 4 == 0){
             for (let i = 0; i < 5; i++){
                 let enemy = new Enemy(0, 0, enemyId);
                 enemy.x = enemy.randomLeftRight();
@@ -77,13 +87,10 @@ function play(time){
 
                 enemyId += 1;
             }
-
-            scoreNum += 1;
-            score.innerHTML = scoreNum;
         }
     }
 
-    if (time - startTime > 1000){
+    if (time - startTime > 1300){
         startTime = undefined;
         notifMsg.innerHTML = '';
 
@@ -95,42 +102,69 @@ function play(time){
         }
     }
 
+    for (let i of bullet){
+        let bullet = i.getObject();
+
+        for (let a of allEnemy){
+            let enemy = a.getObject();
+
+            if (isCollision(bullet, enemy)){
+                if (a.type == 'enemy'){
+                    scoreNum += 1;
+                    score.innerHTML = scoreNum;
+                }
+
+                i.dead = true;
+                a.dead = true;
+
+                bullet.remove();
+                enemy.remove();
+                allEnemy = gameObj.filter(data => data.type.includes('enemy') && data.dead == false);
+                enemyData = gameObj.filter(data => data.type == 'enemy' && data.dead == false);
+                enemyBullet = gameObj.filter(data => data.type == 'enemy-bullet' && data.dead == false);
+            }
+        }
+
+        i.shoot();
+    }
+
+
     let planee = plane[0].getObject();
 
-    for (let a of enemyBullet){
-        let bullet = a.getObject();
+    for (let j of enemyBullet){
+        let enemyBlt = j.getObject();
 
-        if (isCollision(planee, bullet)){
+        if (isCollision(planee, enemyBlt)){
             plane[0].dead = true;
-            bullet.dead = true;
+            j.dead = true;
 
             planee.remove();
-            bullet.remove();
+            enemyBlt.remove();
             notifMsg.innerHTML = 'You Lose';
 
             setTimeout(() => window.location.reload(), 1000);
         }
 
         else{
-            a.shoot();
+            j.shoot();
         }
     }
 
-    for (let a of enemyData){
-        let enemy = a.getObject();
+    for (let d of enemyData){
+        let enemyPlane = d.getObject();
 
-        if (isCollision(planee, enemy)){
+        if (isCollision(planee, enemyPlane)){
             plane[0].dead = true;
-            enemy.dead = true;
+            enemyPlane.dead = true;
 
             planee.remove();
-            enemy.remove();
+            enemyPlane.remove();
             notifMsg.innerHTML = 'You Lose';
             
             setTimeout(() => window.location.reload(), 1000);
         }
 
-        a.updatePos();
+        d.updatePos();
     }
 
 

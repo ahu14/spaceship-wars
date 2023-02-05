@@ -14,7 +14,7 @@ export default class Enemy extends GameObject{
     }
 
     randomHeight(){
-        return Math.floor(Math.random() * 10) * -1;
+        return Math.floor(Math.random() * 100) * -1;
     }
 
     randomLeftRight(){

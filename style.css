@@ -59,6 +59,19 @@ body{
     background: #ddd;
 }
 
+.bullet{
+    position: absolute;
+    left: calc(var(--x));
+    top: calc(var(--y));
+    z-index: -1;
+
+    width: calc(var(--width) * 1vh);
+    height: calc(var(--height) * 1vh);
+    
+    animation: 8s linear;
+    background: #ff0000;
+}
+
 
 .enemy{
     position: absolute;

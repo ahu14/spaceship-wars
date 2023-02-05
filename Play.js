@@ -32,7 +32,7 @@ document.addEventListener('click', (event) => {
 })
 
 let gameObj = [];
-let plane = new Plane(0, 95, 0);
+let plane = new Plane(0, 90, 0);
 plane.summonObject();
 gameObj.push(plane);
 

@@ -49,59 +49,70 @@ body{
 
 .plane{
     position: absolute;
-    left: calc(var(--x));
-    top: calc(var(--y));
+    left: calc(var(--x) * 1vw);
+    top: calc(var(--y) * 1vh);
 
-    width: calc(var(--width) * 1vh);
-    height: calc(var(--height) * 1vh);
+    width: calc(var(--width) * 1vw);
+    height: calc(var(--width) * 1vh);
+
     transition: 50ms;
-
-    background: #ddd;
+    background-image: url('../Assets/player.png');
 }
 
 .plane-bullet{
     position: absolute;
-    left: calc(var(--x));
-    top: calc(var(--y));
+    left: calc(var(--x) * 1vw);
+    top: calc(var(--y) * 1vh);
     z-index: -1;
 
-    width: calc(var(--width) * 1vh);
-    height: calc(var(--height) * 1vh);
+    width: calc(var(--width) * 1px);
+    height: calc(var(--height) * 1px);
     
     animation: 8s linear;
-    background: #ff0000;
+    border-radius: 4px 4px 0 0;
+    background: red;
 }
 
 
 .enemy{
     position: absolute;
-    left: calc(var(--x));
-    top: calc(var(--y));
+    left: calc(var(--x) * 1vw);
+    top: calc(var(--y) * 1vh);
 
-    width: calc(var(--width) * 1vh);
-    height: calc(var(--height) * 1vh);
+    width: calc(var(--width) * 1vw);
+    height: auto;
     transition: 50ms;
 
-    background: #ccc;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 
 .enemy-bullet{
     position: absolute;
-    left: calc(var(--x));
-    top: calc(var(--y));
+    left: calc(var(--x) * 1vw);
+    top: calc(var(--y) * 1vh);
     z-index: -1;
 
-    width: calc(var(--width) * 1vh);
-    height: calc(var(--height) * 1vh);
-    
+    width: calc(var(--width) * 1px);
+    height: calc(var(--height) * 1px);
+
+    border-radius: 0 0 4px 4px;
     animation: 8s linear;
-    background: #ff0000;
+    background: red;
 }
+
+
+
+[class^="plane"], [class^="enemy"]{
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 
 .notif-box{
     position: absolute;
-    bottom: 5vh;
+    bottom: 25vh;
 
     width: 100vw;
     height: 10vh;
@@ -110,7 +121,7 @@ body{
 }
 
 #notif-message{
-    font-size: 30px;
+    font-size: 20px;
     font-family: sans-serif;
     color: #ff0000;
 }
@@ -119,5 +130,14 @@ body{
 @media screen and (min-width: 768px){
     [class^="btn"]{
         display: none;
+    }
+
+    .notif-box{
+        position: absolute;
+        bottom: 10vh;
+    }
+
+    #notif-message{
+        font-size: 30px;
     }
 }

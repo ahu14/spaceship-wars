@@ -28,7 +28,8 @@ document.addEventListener('click', (event) => {
     }
 })
 
-let plane = new Plane(0, 90, 0);
+let position = window.innerHeight > window.innerWidth ? 78 : 88;
+let plane = new Plane(0, position, 0);
 plane.summonObject();
 gameObj.push(plane);
 
@@ -55,9 +56,8 @@ let notifMsg = document.querySelector('#notif-message');
 if (window.innerWidth > 768){
     notifMsg.innerHTML = 'Click A to move left, D to move right and space for shoot';
 }
-
 else{
-    notifMsg.innerHTML = 'Click < to move left, > to move right and tap the screen to shoot';
+    notifMsg.innerHTML = 'Click < to move left, > to move right and click the screen to shoot';
 }
 
 
@@ -89,10 +89,11 @@ function play(time){
 
     if (time - startTime > 1300){
         startTime = undefined;
-        notifMsg.innerHTML = '';
+        notifMsg.innerHTML = "";
 
         for (let i of enemyData){
-            let enemyBullet = new EnemyBullet(i.x + 0.5, i.y, enemyBulletId);
+            let margin = window.innerHeight > window.innerWidth ? 4.3 : 2.6;
+            let enemyBullet = new EnemyBullet(i.x + margin, i.y, enemyBulletId);
             enemyBullet.summonObject();
             gameObj.push(enemyBullet);
             enemyBulletId += 1;

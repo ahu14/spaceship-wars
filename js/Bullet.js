@@ -8,8 +8,8 @@ export default class Bullet extends GameObject{
         this.type = 'plane-bullet';
         this.id = id;
 
-        this.width = 2;
-        this.height = 2; 
+        this.width = window.innerHeight > window.innerWidth ? 5 : 10;
+        this.height = window.innerHeight > window.innerWidth ? 5 : 10;
 
         this.shoot = () => {
             let bullet = this.getObject(this.type, this.id);

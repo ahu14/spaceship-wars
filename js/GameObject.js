@@ -20,8 +20,19 @@ export default class GameObject{
     }
 
     summonObject(id){
-        let obj = document.createElement('div');
-        obj.className = `${this.type}`;
+        let obj;
+
+        if (this.type == 'enemy'){
+            obj = document.createElement('img');
+            obj.src = "./Assets/enemyShip.png";
+            obj.className = 'enemy';
+        }
+
+        else{
+            obj = document.createElement('div');
+            obj.className = `${this.type}`;
+        }
+
         obj.id = `${this.type}-${this.id}`;
 
         obj.style.left = this.x + 'vw';

@@ -9,8 +9,7 @@ export default class Enemy extends GameObject{
         this.type = 'enemy';
         this.id = id;
 
-        this.width = 4;
-        this.height = 4;
+        this.width = window.innerHeight > window.innerWidth ? 10 : 6;
     }
 
     randomHeight(){
@@ -20,6 +19,7 @@ export default class Enemy extends GameObject{
     randomLeftRight(){
         return Math.floor(Math.random() * 96);
     }
+
 
     updatePos(){
         let plane = document.querySelector(`#${this.type}-${this.id}`);

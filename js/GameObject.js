@@ -29,11 +29,11 @@ export default class GameObject{
 
         obj.style.setProperty('--width', this.width);
         obj.style.setProperty('--height', this.width);
-
+        
         this.getBody().append(obj);
     }
 
-    removeObject(type, id){
+    removeObject(data, type, id){
         let obj = this.getObject(this.type, this.id);
         obj.remove();
     }

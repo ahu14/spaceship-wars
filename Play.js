@@ -1,6 +1,7 @@
-import Plane from "./PlaneGame.js";
-import Enemy from "./EnemyPlane.js";
-import EnemyBullet from "./EnemyBullet.js";
+import Plane from "./js/Plane.js";
+import Enemy from "./js/EnemyPlane.js";
+import EnemyBullet from "./js/EnemyBullet.js";
+import { gameObj, filterAll, filterData, updateData } from "./js/filterData.js";
 
 function isCollision(objA, objB){
     let a = objA.getBoundingClientRect();
@@ -12,10 +13,6 @@ function isCollision(objA, objB){
         ((a.x + a.width) < b.x) ||
         (a.x > (b.x + b.width))
     )
-}
-
-function randomPlane(){
-    return Math.floor(Math.random() * 3);
 }
 
 
@@ -31,7 +28,6 @@ document.addEventListener('click', (event) => {
     }
 })
 
-let gameObj = [];
 let plane = new Plane(0, 90, 0);
 plane.summonObject();
 gameObj.push(plane);
@@ -66,18 +62,20 @@ else{
 
 
 function play(time){
-    let allEnemy = gameObj.filter(data => data.type.includes('enemy') && data.dead == false);
-    let enemyData = gameObj.filter(data => data.type == 'enemy' && data.dead == false);
-    let enemyBullet = gameObj.filter(data => data.type == 'enemy-bullet' && data.dead == false);
-    let plane = gameObj.filter(data => data.type == 'plane');
-    let bullet = gameObj.filter(data => data.type == 'bullet' && data.dead == false);
+    updateData();
+
+    let allEnemy = filterAll('enemy');
+    let enemyData = filterData('enemy');
+    let plane = filterData('plane')[0];
+    let bullet = filterData('plane-bullet');
+
 
     if (startTime == undefined){
         startTime = time;
         times += 1;
         
         if (times % 4 == 0){
-            for (let i = 0; i < 5; i++){
+            for (let i = 0; i < 3; i++){
                 let enemy = new Enemy(0, 0, enemyId);
                 enemy.x = enemy.randomLeftRight();
                 enemy.y = enemy.randomHeight();
@@ -119,52 +117,30 @@ function play(time){
 
                 bullet.remove();
                 enemy.remove();
-                allEnemy = gameObj.filter(data => data.type.includes('enemy') && data.dead == false);
-                enemyData = gameObj.filter(data => data.type == 'enemy' && data.dead == false);
-                enemyBullet = gameObj.filter(data => data.type == 'enemy-bullet' && data.dead == false);
+
+                allEnemy = filterAll('enemy');
             }
         }
 
         i.shoot();
     }
 
+    let planeObj = plane.getObject();
 
-    let planee = plane[0].getObject();
+    for (let d of allEnemy){
+        let enemy = d.getObject();
+        d.type == "enemy-bullet" ? d.shoot() : d.updatePos();
 
-    for (let j of enemyBullet){
-        let enemyBlt = j.getObject();
+        if (isCollision(planeObj, enemy)){
+            plane.dead = true;
+            enemy.dead = true;
 
-        if (isCollision(planee, enemyBlt)){
-            plane[0].dead = true;
-            j.dead = true;
-
-            planee.remove();
-            enemyBlt.remove();
-            notifMsg.innerHTML = 'You Lose';
-
-            setTimeout(() => window.location.reload(), 1000);
-        }
-
-        else{
-            j.shoot();
-        }
-    }
-
-    for (let d of enemyData){
-        let enemyPlane = d.getObject();
-
-        if (isCollision(planee, enemyPlane)){
-            plane[0].dead = true;
-            enemyPlane.dead = true;
-
-            planee.remove();
-            enemyPlane.remove();
+            planeObj.remove();
+            enemy.remove();
             notifMsg.innerHTML = 'You Lose';
             
             setTimeout(() => window.location.reload(), 1000);
         }
-
-        d.updatePos();
     }
 
 

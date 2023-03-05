@@ -25,7 +25,7 @@ export default class Enemy extends GameObject{
         let plane = document.querySelector(`#${this.type}-${this.id}`);
 
         if (this.y < 100){
-            this.y += 0.3;
+            this.y += 0.2;
             plane.style.top = this.y + 'vh';
         }
 

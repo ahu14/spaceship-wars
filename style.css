@@ -53,10 +53,9 @@ body{
     top: calc(var(--y) * 1vh);
 
     width: calc(var(--width) * 1vw);
-    height: calc(var(--width) * 1vh);
+    height: auto;
 
     transition: 50ms;
-    background-image: url('../Assets/player.png');
 }
 
 .plane-bullet{
@@ -82,9 +81,6 @@ body{
     width: calc(var(--width) * 1vw);
     height: auto;
     transition: 50ms;
-
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 
@@ -112,7 +108,7 @@ body{
 
 .notif-box{
     position: absolute;
-    bottom: 25vh;
+    bottom: 15vh;
 
     width: 100vw;
     height: 10vh;
@@ -130,11 +126,6 @@ body{
 @media screen and (min-width: 768px){
     [class^="btn"]{
         display: none;
-    }
-
-    .notif-box{
-        position: absolute;
-        bottom: 10vh;
     }
 
     #notif-message{

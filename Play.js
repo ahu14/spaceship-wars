@@ -28,8 +28,7 @@ document.addEventListener('click', (event) => {
     }
 })
 
-let position = window.innerHeight > window.innerWidth ? 78 : 88;
-let plane = new Plane(0, position, 0);
+let plane = new Plane(0, 92, 0);
 plane.summonObject();
 gameObj.push(plane);
 
@@ -92,7 +91,7 @@ function play(time){
         notifMsg.innerHTML = "";
 
         for (let i of enemyData){
-            let margin = window.innerHeight > window.innerWidth ? 4.3 : 2.6;
+            let margin = window.innerHeight > window.innerWidth ? 6.8 : 2.65;
             let enemyBullet = new EnemyBullet(i.x + margin, i.y, enemyBulletId);
             enemyBullet.summonObject();
             gameObj.push(enemyBullet);

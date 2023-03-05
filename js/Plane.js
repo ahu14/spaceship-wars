@@ -8,8 +8,7 @@ export default class Plane extends GameObject{
         this.type = 'plane';
         this.id = 0;
 
-        this.width = 10;
-        this.height = 10;
+        this.width = window.innerHeight > window.innerWidth ? 15 : 6;
 
         this.bulletId = 0;
         this.shooted = false;
@@ -21,11 +20,13 @@ export default class Plane extends GameObject{
 
     move(code, gameObj){
         let plane = this.getObject();
+        let margin = window.innerHeight > window.innerWidth ? 85 : 95;
+
         code == 65 && this.x > 0 ? this.x -= 5 : this.x;
-        code == 68 && this.x < 95 ? this.x += 5 : this.x;
+        code == 68 && this.x < margin ? this.x += 5 : this.x;
 
         if (code == 32 && this.shooted == false){
-            let margin = window.innerHeight > window.innerWidth ? 4.25 : 2.7;
+            let margin = window.innerHeight > window.innerWidth ? 6.8 : 2.65;
             let bullet = new Bullet(this.x + margin, this.y, this.bulletId);
             bullet.summonObject();
             gameObj.push(bullet);

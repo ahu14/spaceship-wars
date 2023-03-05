@@ -28,6 +28,12 @@ export default class GameObject{
             obj.className = 'enemy';
         }
 
+        else if (this.type == 'plane'){
+            obj = document.createElement('img');
+            obj.src = "./Assets/player.png";
+            obj.className = 'plane';
+        }
+
         else{
             obj = document.createElement('div');
             obj.className = `${this.type}`;

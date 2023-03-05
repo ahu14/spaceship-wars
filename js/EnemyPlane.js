@@ -9,7 +9,7 @@ export default class Enemy extends GameObject{
         this.type = 'enemy';
         this.id = id;
 
-        this.width = window.innerHeight > window.innerWidth ? 10 : 6;
+        this.width = window.innerHeight > window.innerWidth ? 15 : 6;
     }
 
     randomHeight(){
@@ -17,7 +17,8 @@ export default class Enemy extends GameObject{
     }
 
     randomLeftRight(){
-        return Math.floor(Math.random() * 96);
+        let margin = window.innerHeight > window.innerWidth ? 85 : 95;
+        return Math.floor(Math.random() * margin);
     }
 
 

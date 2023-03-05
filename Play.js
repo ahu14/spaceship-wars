@@ -28,7 +28,8 @@ document.addEventListener('click', (event) => {
     }
 })
 
-let plane = new Plane(0, 92, 0);
+let setY = window.innerHeight > window.innerWidth ? 79 : 89;
+let plane = new Plane(0, setY, 0);
 plane.summonObject();
 gameObj.push(plane);
 

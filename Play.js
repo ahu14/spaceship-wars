@@ -1,7 +1,7 @@
 import Plane from "./js/Plane.js";
 import Enemy from "./js/EnemyPlane.js";
 import EnemyBullet from "./js/EnemyBullet.js";
-import { gameObj, filterAll, filterData, updateData } from "./js/filterData.js";
+import { gameObj, filterAll, filterData, updateData } from "./js/FilterData.js";
 
 function isCollision(objA, objB){
     let a = objA.getBoundingClientRect();

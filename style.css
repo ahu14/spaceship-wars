@@ -50,59 +50,44 @@ body{
 .plane{
     position: absolute;
     left: calc(var(--x) * 1vw);
-    top: calc(var(--y) * 1vh);
+    top: 78vh;
 
-    width: calc(var(--width) * 1vw);
-    height: calc(var(--width) * 1vh);
+    width: 7vw;
+    height: 10vh;
 
     transition: 50ms;
     background-image: url('../Assets/player.png');
 }
-
-.plane-bullet{
-    position: absolute;
-    left: calc(var(--x) * 1vw);
-    top: calc(var(--y) * 1vh);
-    z-index: -1;
-
-    width: calc(var(--width) * 1px);
-    height: calc(var(--height) * 1px);
-    
-    animation: 8s linear;
-    border-radius: 4px 4px 0 0;
-    background: red;
-}
-
 
 .enemy{
     position: absolute;
     left: calc(var(--x) * 1vw);
     top: calc(var(--y) * 1vh);
 
-    width: calc(var(--width) * 1vw);
+    width: 6.5vw;
     height: auto;
     transition: 50ms;
-
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 
-.enemy-bullet{
+
+.plane-bullet, .enemy-bullet{
     position: absolute;
     left: calc(var(--x) * 1vw);
     top: calc(var(--y) * 1vh);
     z-index: -1;
 
-    width: calc(var(--width) * 1px);
-    height: calc(var(--height) * 1px);
-
-    border-radius: 0 0 4px 4px;
+    width: 5px;
+    height: 5px;
+    
     animation: 8s linear;
+    border-radius: 4px 4px 0 0;
     background: red;
 }
 
-
+.enemy-bullet{
+    border-radius: 0 0 4px 4px;
+}
 
 [class^="plane"], [class^="enemy"]{
     background-size: contain;
@@ -130,6 +115,15 @@ body{
 @media screen and (min-width: 768px){
     [class^="btn"]{
         display: none;
+    }
+
+    .plane{
+        top: 88vh;
+    }
+
+    .enemy-bullet, .plane-bullet{
+        width: 10px;
+        height: 10px;
     }
 
     .notif-box{

@@ -5,9 +5,6 @@ export default class GameObject{
         this.type = type;
         this.dead = false;
         this.id = id;
-
-        this.width = 0;
-        this.height = 0;
     }
 
     getBody(){
@@ -40,12 +37,8 @@ export default class GameObject{
         }
 
         obj.id = `${this.type}-${this.id}`;
-
-        obj.style.left = this.x + 'vw';
-        obj.style.top = this.y + 'vh';
-
-        obj.style.setProperty('--width', this.width);
-        obj.style.setProperty('--height', this.width);
+        obj.style.setProperty('--x', this.x);
+        obj.style.setProperty('--y', this.y);
         
         this.getBody().append(obj);
     }

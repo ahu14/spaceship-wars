@@ -6,10 +6,10 @@ Game Link :
 
 
 ## Feature :
-* Enemy can shoot you
-* You can shoot enemy too
+* The enemy can shoot you if you're in front of it
+* You can shoot the enemy
 * Score counter
-* Simple graphics added the plane and enemy design from [here](https://github.com/microsoft/Web-Dev-For-Beginners)<br>
+* Simple graphics added. The plane and enemy design from [here](https://github.com/microsoft/Web-Dev-For-Beginners)<br>
 
 ## Language used : 
 - HTML 

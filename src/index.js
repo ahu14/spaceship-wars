@@ -1,7 +1,14 @@
-import { JetPlane, EnemyJet } from "./js/Plane.js";
-import { Bullet, EnemyBullet } from "./js/Bullet.js";
-import { enemy, player, message, settings, clickEvent, keyUp } from "./js/GameData.js";
-import { gameObj, filterAll, filterData, updateData } from "./js/filterData.js";
+import _ from "lodash";
+import "../style.css";
+import "../Assets/enemyShip.png";
+import "../Assets/pew-pew.mp3";
+import "../Assets/player.png";
+
+
+import { JetPlane, EnemyJet } from "./Plane.js";
+import { Bullet, EnemyBullet } from "./Bullet.js";
+import { enemy, player, message, settings, clickEvent, keyUp } from "./GameData.js";
+import { gameObj, filterAll, filterData, updateData } from "./filterData.js";
 
 function isCollision(objA, objB){
     if (objA != null && objB != null){

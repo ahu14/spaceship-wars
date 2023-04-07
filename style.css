@@ -50,10 +50,10 @@ body{
 .plane{
     position: absolute;
     left: calc(var(--x) * 1vw);
-    top: 78vh;
+    top: 88vh;
 
-    width: 7vw;
-    height: 10vh;
+    width: 10vw;
+    height: auto;
 
     transition: 50ms;
 }
@@ -63,7 +63,7 @@ body{
     left: calc(var(--x) * 1vw);
     top: calc(var(--y) * 1vh);
 
-    width: 6.5vw;
+    width: 9.5vw;
     height: auto;
     transition: 50ms;
 }
@@ -111,6 +111,7 @@ body{
 }
 
 
+
 @media screen and (min-width: 768px){
     [class^="btn"]{
         display: none;
@@ -118,6 +119,13 @@ body{
 
     .plane{
         top: 88vh;
+        width: 6vw;
+        height: auto;
+    }
+    
+    .enemy{
+        width: 5.5vw;
+        height: auto;
     }
 
     .enemy-bullet, .plane-bullet{

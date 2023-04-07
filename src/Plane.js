@@ -20,13 +20,12 @@ export class JetPlane extends GameObject{
 
     move(code, gameObj){
         let plane = this.getObject();
-        let margin = window.innerHeight > window.innerWidth ? 85 : 95;
 
-        code == 65 && this.x > 0 ? this.x -= 5 : this.x;
-        code == 68 && this.x < margin ? this.x += 5 : this.x;
+        code == 65 && this.x > 0 ? this.x -= settings.xPos : this.x;
+        code == 68 && this.x < settings.planeMargin ? this.x += settings.xPos : this.x;
 
         if (code == 32 && this.shooted == false){
-            let bullet = new Bullet(this.x + settings.bulletMargin, 90, this.bulletId);
+            let bullet = new Bullet(this.x + settings.bulletMargin, 88, this.bulletId);
             bullet.summonObject();
             gameObj.push(bullet);
 
@@ -38,7 +37,7 @@ export class JetPlane extends GameObject{
             this.countTime();
         }
 
-        plane.style.left = this.x + 'vw';
+        plane.style.setProperty('--x', this.x);
     }
 }
 
@@ -66,7 +65,7 @@ export class EnemyJet extends GameObject{
     }
 
     randomLeftRight(){
-        return Math.floor(Math.random() * 96);
+        return Math.floor(Math.random() * settings.planeMargin);
     }
 
 

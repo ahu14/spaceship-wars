@@ -12,8 +12,10 @@ export let message = {
 
 
 export let settings = {
-    enemyMargin: window.innerHeight > window.innerWidth ? 4.3 : 3.2,
-    bulletMargin: window.innerHeight > window.innerWidth ? 4.25 : 2.7,
+    enemyMargin: window.innerWidth < 768 ? 4.3 : 2.45,
+    bulletMargin: window.innerWidth < 768 ? 4.3 : 2.6,
+    planeMargin: window.innerWidth < 768 ? 90 : 94,
+    xPos: window.innerWidth < 768 ? 4.5 : 4.7
 }
 
 export let player = {
